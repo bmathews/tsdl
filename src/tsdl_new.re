@@ -86,7 +86,12 @@ type dpiT = {
 
 external get_window_dpi : windowT => dpiT = "TSDL_GetDisplayDPI";
 
+type surfaceT;
+type cursorT;
+
 external show_cursor : int => int = "TSDL_ShowCursor";
+external set_cursor : cursorT => unit = "TSDL_SetCursor";
+external create_color_cursor : (surfaceT, int, int) => cursorT = "TSDL_CreateColorCursor";
 
 module Init = {
   let timer = 1;
@@ -153,13 +158,11 @@ external get_time_diff : (int64T, int64T) => float = "TGetTimeDiff";
 
 [@noalloc] external gl_swap_window : windowT => unit = "TSDL_GL_SwapWindow";
 
-type surfaceT;
-
 external get_window_surface : windowT => surfaceT = "TSDL_GetWindowSurface";
 
 external load_bmp : string => surfaceT = "TSDL_LoadBMP";
 
-external blit_surface : (surfaceT, surfaceT) => int = "TSDL_BlitSurface";
+external blit_surface : (surfaceT, surfaceT) => surfaceT = "TSDL_BlitSurface";
 
 external update_window : windowT => int = "TSDL_UpdateWindowSurface";
 
